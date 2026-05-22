@@ -12,7 +12,6 @@ import {
   Boxes,
   Lock,
   ClockAlert,
-  FileWarning,
   ShieldAlert,
   ServerCrash,
   SearchX,

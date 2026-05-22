@@ -9,8 +9,8 @@ export default function RootLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
-        <SidebarTrigger />
+      <main className="w-full">
+        {/* <SidebarTrigger /> */}
         {children}
       </main>
     </SidebarProvider>
