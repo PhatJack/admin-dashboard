@@ -10,6 +10,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
+import { GoBackButton } from "./go-back-button"
 
 type ErrorEmptyProps = {
   code: string
@@ -39,13 +40,14 @@ export function ErrorEmpty({
         </EmptyHeader>
         <EmptyContent>
           {buttons && buttons?.length > 0 ? (
-            <div className="flex w-full items-center justify-center gap-2">
-              {buttons}
-            </div>
+            buttons
           ) : (
-            <Button asChild>
-              <Link href="/">Back to home</Link>
-            </Button>
+            <div className="flex w-full items-center justify-center gap-4">
+              <GoBackButton />
+              <Button asChild>
+                <Link href="/">Back to home</Link>
+              </Button>
+            </div>
           )}
         </EmptyContent>
       </Empty>

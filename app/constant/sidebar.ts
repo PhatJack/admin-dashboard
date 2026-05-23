@@ -58,7 +58,7 @@ export const sidebarMenu: SidebarMenuGroup[] = [
         title: "Chats",
         url: "/chats",
         icon: MessageSquare,
-        badge: "3",
+        badge: "10",
       },
       {
         title: "Users",
@@ -93,21 +93,21 @@ export const sidebarMenu: SidebarMenuGroup[] = [
         icon: ShieldCheck,
         items: [
           {
-            title: "Sign In",
-            url: "/auth/sign-in",
+            title: "Login",
+            url: "/login",
           },
           {
-            title: "Sign Up",
-            url: "/auth/sign-up",
+            title: "Register",
+            url: "/register",
           },
           {
             title: "Forgot Password",
-            url: "/auth/forgot-password",
+            url: "/forgot-password",
             badge: "New",
           },
           {
             title: "OTP",
-            url: "/auth/otp",
+            url: "/otp",
           },
         ],
       },
@@ -157,7 +157,7 @@ export const sidebarMenu: SidebarMenuGroup[] = [
       },
       {
         title: "Help Center",
-        url: "/help-center",
+        url: "/coming-soon",
         icon: CircleHelp,
       },
     ],

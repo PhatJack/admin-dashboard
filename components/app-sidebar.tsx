@@ -7,6 +7,7 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
+  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
@@ -158,7 +159,7 @@ export function AppSidebar() {
                             {item.icon && <item.icon className="size-4" />}
                             {item.title}
                             {item.badge && (
-                              <Badge className="ml-auto">{item.badge}</Badge>
+                              <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>
                             )}
                             <ChevronRight
                               className={cn(
@@ -184,9 +185,9 @@ export function AppSidebar() {
                               )}
                               <span className="truncate">{subItem.title}</span>
                               {subItem.badge && (
-                                <Badge className="ml-auto">
+                                <SidebarMenuBadge>
                                   {subItem.badge}
-                                </Badge>
+                                </SidebarMenuBadge>
                               )}
                             </Link>
                           </SidebarMenuButton>
@@ -207,7 +208,9 @@ export function AppSidebar() {
                           {item.icon && <item.icon className="size-4" />}
                           {item.title}
                           {item.badge && (
-                            <Badge className="ml-auto">{item.badge}</Badge>
+                            <SidebarMenuBadge>
+                              {item.badge}
+                            </SidebarMenuBadge>
                           )}
                         </Link>
                       ) : (
@@ -215,37 +218,15 @@ export function AppSidebar() {
                           {item.icon && <item.icon className="size-4" />}
                           {item.title}
                           {item.badge && (
-                            <Badge className="ml-auto">{item.badge}</Badge>
+                            <SidebarMenuBadge>
+                              {item.badge}
+                            </SidebarMenuBadge>
                           )}
                         </>
                       )}
                     </SidebarMenuButton>
                   )
                 )}
-                {/* {group.items.map((item) =>
-                  item.items && item.items.length ? (
-                    // <Collapsible defaultOpen>
-                    <SidebarMenu key={item.title} title={item.title}>
-                      {item.items.map((subItem) => (
-                        <SidebarMenuButton key={subItem.title}>
-                          {subItem.icon && <subItem.icon className="size-4" />}
-                          {subItem.title}
-                          {subItem.badge && (
-                            <Badge className="ml-auto">{subItem.badge}</Badge>
-                          )}
-                        </SidebarMenuButton>
-                      ))}
-                    </SidebarMenu>
-                  ) : (
-                    <SidebarMenuButton key={item.title}>
-                      {item.icon && <item.icon className="size-4" />}
-                      {item.title}
-                      {item.badge && (
-                        <Badge className="ml-auto">{item.badge}</Badge>
-                      )}
-                    </SidebarMenuButton>
-                  )
-                )} */}
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>
