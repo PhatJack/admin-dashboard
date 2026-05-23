@@ -1,0 +1,79 @@
+<h2>Dashboard Layout Direction</h2>
+<p class="subtitle">Choose the structure you want for the four-tab dashboard. The final page will use shadcn Tabs, Card, Badge, and Chart components with sample data from <code>app/constant</code>.</p>
+
+<div class="cards">
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div style="width:150px;height:18px;border-radius:4px;background:#111827"></div>
+          <div style="width:260px;height:32px;border-radius:8px;background:#e5e7eb"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px">
+          <div class="placeholder" style="height:72px"></div>
+          <div class="placeholder" style="height:72px"></div>
+          <div class="placeholder" style="height:72px"></div>
+          <div class="placeholder" style="height:72px"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:10px">
+          <div class="placeholder" style="height:190px"></div>
+          <div class="placeholder" style="height:190px"></div>
+        </div>
+        <div class="placeholder" style="height:120px"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A. Balanced Ops Dashboard</h3>
+      <p>Header, tabs, four metric cards, one large trend chart, one side chart, then a compact detail section. Best for an admin dashboard homepage.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div style="width:220px;height:22px;border-radius:4px;background:#111827"></div>
+        <div style="width:320px;height:32px;border-radius:8px;background:#e5e7eb"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="placeholder" style="height:86px"></div>
+          <div class="placeholder" style="height:86px"></div>
+          <div class="placeholder" style="height:86px"></div>
+          <div class="placeholder" style="height:86px"></div>
+        </div>
+        <div class="placeholder" style="height:230px"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="placeholder" style="height:130px"></div>
+          <div class="placeholder" style="height:130px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B. Chart-First Analytics</h3>
+      <p>More vertical and chart-heavy, with the main visualization taking center stage. Strong for analytics but less scan-friendly.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:12px">
+        <div class="placeholder" style="height:420px"></div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="width:160px;height:20px;border-radius:4px;background:#111827"></div>
+            <div style="width:260px;height:32px;border-radius:8px;background:#e5e7eb"></div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+            <div class="placeholder" style="height:78px"></div>
+            <div class="placeholder" style="height:78px"></div>
+            <div class="placeholder" style="height:78px"></div>
+          </div>
+          <div class="placeholder" style="height:220px"></div>
+          <div class="placeholder" style="height:86px"></div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C. Sidebar Workspace</h3>
+      <p>Uses a persistent internal dashboard sidebar. Useful later, but duplicates the existing app sidebar pattern for this single page.</p>
+    </div>
+  </div>
+</div>

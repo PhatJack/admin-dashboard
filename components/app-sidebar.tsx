@@ -37,8 +37,9 @@ import {
 } from "lucide-react"
 
 import { Avatar, AvatarFallback } from "./ui/avatar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { sidebarMenu } from "@/app/constant/sidebar"
+import { usePathname } from "next/navigation"
 import { Badge } from "./ui/badge"
 import Link from "next/link"
 import {
@@ -72,6 +73,8 @@ const teams = [
 ]
 
 export function AppSidebar() {
+  const pathname = usePathname()
+
   const [activeTeam, setActiveTeam] = useState(teams[0])
   const [activeCollapsible, setActiveCollapsible] = useState<string | null>(
     null
@@ -103,7 +106,7 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent side="right" align="start">
+              <DropdownMenuContent>
                 <DropdownMenuLabel>Switch Team</DropdownMenuLabel>
 
                 <DropdownMenuGroup>
@@ -154,7 +157,7 @@ export function AppSidebar() {
                       }
                     >
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton>
+                        <SidebarMenuButton isActive={pathname === item.url}>
                           <div className="flex w-full items-center gap-2">
                             {item.icon && <item.icon className="size-4" />}
                             {item.title}
@@ -199,6 +202,7 @@ export function AppSidebar() {
                       key={item.title}
                       asChild
                       tooltip={item.title}
+                      isActive={pathname === item.url}
                     >
                       {item.url ? (
                         <Link
@@ -208,9 +212,7 @@ export function AppSidebar() {
                           {item.icon && <item.icon className="size-4" />}
                           {item.title}
                           {item.badge && (
-                            <SidebarMenuBadge>
-                              {item.badge}
-                            </SidebarMenuBadge>
+                            <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>
                           )}
                         </Link>
                       ) : (
@@ -218,9 +220,7 @@ export function AppSidebar() {
                           {item.icon && <item.icon className="size-4" />}
                           {item.title}
                           {item.badge && (
-                            <SidebarMenuBadge>
-                              {item.badge}
-                            </SidebarMenuBadge>
+                            <SidebarMenuBadge>{item.badge}</SidebarMenuBadge>
                           )}
                         </>
                       )}
@@ -255,7 +255,7 @@ export function AppSidebar() {
                 <ChevronsUpDown className="size-4 text-muted-foreground" />
                 {/* </SidebarMenuButton> */}
               </DropdownMenuTrigger>
-              <DropdownMenuContent side="right" align="end">
+              <DropdownMenuContent>
                 <DropdownMenuLabel className="flex items-center gap-2 px-2 py-2 font-normal">
                   <Avatar>
                     <AvatarFallback>CN</AvatarFallback>
