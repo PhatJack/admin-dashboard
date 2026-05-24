@@ -22,12 +22,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import Link from "next/link"
 
 const AppHeader = () => {
   return (
     <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/80">
       <SidebarTrigger />
-      <Separator orientation="vertical" className="h-5 my-auto" />
+      <Separator orientation="vertical" className="my-auto h-5" />
 
       <div className="flex min-w-0 flex-1 items-center gap-3">
         <div className="min-w-0">
@@ -38,7 +39,10 @@ const AppHeader = () => {
         </div>
 
         <div className="relative ms-auto hidden w-full max-w-sm md:block">
-          <Search size={16} className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground" />
+          <Search
+            size={16}
+            className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground"
+          />
           <Input
             type="search"
             placeholder="Search dashboard..."
@@ -91,19 +95,25 @@ const AppHeader = () => {
               <User />
               Account
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <CreditCard />
-              Billing
+            <DropdownMenuItem asChild>
+              <Link href="/billing" className="cursor-pointer">
+                <CreditCard />
+                Billing
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings />
-              Settings
+            <DropdownMenuItem asChild>
+              <Link href="/settings" className="cursor-pointer">
+                <Settings />
+                Settings
+              </Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive">
-            <LogOut />
-            Sign out
+          <DropdownMenuItem variant="destructive" asChild>
+            <Link href="/login" className="cursor-pointer">
+              <LogOut />
+              Sign out
+            </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
