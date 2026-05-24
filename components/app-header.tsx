@@ -38,7 +38,7 @@ const AppHeader = () => {
         </div>
 
         <div className="relative ms-auto hidden w-full max-w-sm md:block">
-          <Search className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground" />
+          <Search size={16} className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
             placeholder="Search dashboard..."
