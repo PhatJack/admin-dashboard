@@ -3,7 +3,7 @@ import NextTopLoader from "nextjs-toploader"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import React from "react"
-
+import { DirectionProvider } from "@/components/ui/direction"
 interface ProvidersProps {
   children: React.ReactNode
 }
@@ -17,7 +17,9 @@ const Providers = ({ children }: ProvidersProps) => {
       disableTransitionOnChange
     >
       <NextTopLoader color="var(--primary)" height={3} showSpinner={false} />
-      <TooltipProvider>{children}</TooltipProvider>
+      <DirectionProvider dir="ltr">
+        <TooltipProvider>{children}</TooltipProvider>
+      </DirectionProvider>
     </ThemeProvider>
   )
 }

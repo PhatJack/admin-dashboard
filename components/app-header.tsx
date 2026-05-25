@@ -1,3 +1,5 @@
+"use client"
+
 import {
   Bell,
   CreditCard,
@@ -7,9 +9,12 @@ import {
   Settings,
   User,
 } from "lucide-react"
+import Link from "next/link"
 
+import { SettingsSheetContent } from "@/components/app-header-settings"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
+import { useDirectionSettings } from "@/components/ui/direction"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +27,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import Link from "next/link"
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 
 const AppHeader = () => {
+  const { direction } = useDirectionSettings()
+
   return (
     <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/80">
       <SidebarTrigger />
@@ -41,19 +48,29 @@ const AppHeader = () => {
         <div className="relative ms-auto hidden w-full max-w-sm md:block">
           <Search
             size={16}
-            className="pointer-events-none absolute top-1/2 left-2.5 -translate-y-1/2 text-muted-foreground"
+            className="pointer-events-none absolute top-1/2 start-2.5 -translate-y-1/2 text-muted-foreground"
           />
           <Input
             type="search"
             placeholder="Search dashboard..."
-            className="pl-8"
+            className="ps-8"
           />
         </div>
       </div>
 
-      <Button type="button" variant="ghost" size="icon" aria-label="Help">
-        <LifeBuoy />
-      </Button>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button type="button" variant="ghost" size="icon" aria-label="Help">
+            <LifeBuoy />
+          </Button>
+        </SheetTrigger>
+        <SheetContent
+          side={direction === "rtl" ? "left" : "right"}
+          className="w-full p-0 sm:max-w-[420px]"
+        >
+          <SettingsSheetContent />
+        </SheetContent>
+      </Sheet>
 
       <Button
         type="button"
