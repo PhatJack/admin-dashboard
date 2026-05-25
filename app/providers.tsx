@@ -1,4 +1,5 @@
 "use client"
+import NextTopLoader from "nextjs-toploader"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import React from "react"
@@ -15,6 +16,7 @@ const Providers = ({ children }: ProvidersProps) => {
       enableSystem
       disableTransitionOnChange
     >
+      <NextTopLoader color="var(--primary)" height={3} showSpinner={false} />
       <TooltipProvider>{children}</TooltipProvider>
     </ThemeProvider>
   )
