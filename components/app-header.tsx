@@ -1,7 +1,6 @@
 "use client"
 
 import {
-  Bell,
   CreditCard,
   LifeBuoy,
   LogOut,
@@ -11,6 +10,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
+import { AppHeaderNotifications } from "@/components/app-header-notifications"
 import { SettingsSheetContent } from "@/components/app-header-settings"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
@@ -38,17 +38,10 @@ const AppHeader = () => {
       <Separator orientation="vertical" className="my-auto h-5" />
 
       <div className="flex min-w-0 flex-1 items-center gap-3">
-        <div className="min-w-0">
-          <h1 className="truncate text-sm font-medium">Dashboard</h1>
-          <p className="hidden text-xs text-muted-foreground sm:block">
-            Business command center
-          </p>
-        </div>
-
         <div className="relative ms-auto hidden w-full max-w-sm md:block">
           <Search
             size={16}
-            className="pointer-events-none absolute top-1/2 start-2.5 -translate-y-1/2 text-muted-foreground"
+            className="pointer-events-none absolute start-2.5 top-1/2 -translate-y-1/2 text-muted-foreground"
           />
           <Input
             type="search"
@@ -72,14 +65,7 @@ const AppHeader = () => {
         </SheetContent>
       </Sheet>
 
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon"
-        aria-label="Notifications"
-      >
-        <Bell />
-      </Button>
+      <AppHeaderNotifications />
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>

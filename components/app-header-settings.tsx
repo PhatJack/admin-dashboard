@@ -76,18 +76,18 @@ const SettingCard = React.memo(function SettingCard({
       type="button"
       onClick={onClick}
       className={cn(
-        "group relative flex w-full flex-col gap-2 rounded-xl border p-2 text-start transition-all duration-200 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40",
+        "group relative flex w-full flex-col gap-2 rounded-lg border p-2 text-start transition-all duration-200 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/40",
         isSelected
           ? "border-foreground/80 bg-muted/40 shadow-sm"
           : "border-border/80 bg-background hover:border-foreground/20 hover:bg-muted/30",
         className
       )}
     >
-      <div className="relative aspect-[1.55] overflow-hidden rounded-xl border border-border/70 bg-linear-to-br from-slate-100 via-background to-slate-50 p-2 shadow-inner dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
+      <div className="relative aspect-[1.55] overflow-hidden rounded-lg border border-border/70 bg-linear-to-br from-slate-100 via-background to-slate-50 p-2 shadow-inner dark:from-slate-900 dark:via-slate-950 dark:to-slate-900">
         {children}
       </div>
       {isSelected ? (
-        <span className="absolute -top-1.5 -end-1.5 inline-flex size-5 items-center justify-center rounded-full bg-slate-950 text-white shadow-md dark:bg-white dark:text-slate-950">
+        <span className="absolute -top-1.5 -inset-e-1.5 inline-flex size-5 items-center justify-center rounded-full bg-slate-950 text-white shadow-md dark:bg-white dark:text-slate-950">
           <Check className="size-3.5" />
         </span>
       ) : null}
@@ -339,7 +339,7 @@ function SettingsSheetContent() {
         <Button
           type="button"
           variant="destructive"
-          className="h-11 w-full rounded-xl text-sm font-semibold"
+          className="h-11 w-full rounded-lg text-sm font-semibold"
           onClick={resetAll}
         >
           Reset
