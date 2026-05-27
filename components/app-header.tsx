@@ -2,7 +2,6 @@
 
 import {
   CreditCard,
-  LifeBuoy,
   LogOut,
   Search,
   Settings,
@@ -11,10 +10,9 @@ import {
 import Link from "next/link"
 
 import { AppHeaderNotifications } from "@/components/app-header-notifications"
-import { SettingsSheetContent } from "@/components/app-header-settings"
+import { AppHeaderSettings } from "@/components/app-header-settings"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { useDirectionSettings } from "@/components/ui/direction"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,11 +25,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 
 const AppHeader = () => {
-  const { direction } = useDirectionSettings()
-
   return (
     <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-3 border-b bg-background/95 px-4 backdrop-blur supports-backdrop-filter:bg-background/80">
       <SidebarTrigger />
@@ -51,19 +46,7 @@ const AppHeader = () => {
         </div>
       </div>
 
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button type="button" variant="ghost" size="icon" aria-label="Help">
-            <LifeBuoy />
-          </Button>
-        </SheetTrigger>
-        <SheetContent
-          side={direction === "rtl" ? "left" : "right"}
-          className="w-full p-0 sm:max-w-[420px]"
-        >
-          <SettingsSheetContent />
-        </SheetContent>
-      </Sheet>
+      <AppHeaderSettings />
 
       <AppHeaderNotifications />
 

@@ -1,15 +1,18 @@
 "use client"
 
 import * as React from "react"
-import { ArrowLeftRight, Check, RotateCcw } from "lucide-react"
+import { ArrowLeftRight, Check, LifeBuoy, RotateCcw } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { useDirectionSettings } from "@/components/ui/direction"
 import {
+  Sheet,
+  SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
+  SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
 
@@ -349,4 +352,24 @@ function SettingsSheetContent() {
   )
 }
 
-export { SettingsSheetContent }
+function AppHeaderSettings() {
+  const { direction } = useDirectionSettings()
+
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button type="button" variant="ghost" size="icon" aria-label="Help">
+          <LifeBuoy />
+        </Button>
+      </SheetTrigger>
+      <SheetContent
+        side={direction === "rtl" ? "left" : "right"}
+        className="w-full p-0 sm:max-w-[420px]"
+      >
+        <SettingsSheetContent />
+      </SheetContent>
+    </Sheet>
+  )
+}
+
+export { AppHeaderSettings, SettingsSheetContent }
