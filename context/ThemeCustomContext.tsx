@@ -57,7 +57,7 @@ export const ThemeCustomProvider: React.FC<{ children: React.ReactNode }> = ({ c
 ${lightVars}
 }
 
-.aeiouly-dark {
+.dark {
 ${darkVars}
 }
 `;
