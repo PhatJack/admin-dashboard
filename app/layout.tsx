@@ -1,5 +1,6 @@
 // For adding custom fonts with other frameworks, see:
 // https://tailwindcss.com/docs/font-family
+import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
@@ -28,7 +29,9 @@ export default function RootLayout({
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <body className={`${fontSans.variable} ${fontMono.variable} antialiased`}>
-        <Providers>{children}</Providers>
+        <ClerkProvider>
+          <Providers>{children}</Providers>
+        </ClerkProvider>
       </body>
     </html>
   )

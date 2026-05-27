@@ -15,6 +15,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import ThemeCustomizer from "./theme-customizer"
+import { ScrollArea } from "./ui/scroll-area"
 
 type ThemeOption = "system" | "light" | "dark"
 type SidebarOption = "inset" | "floating" | "sidebar"
@@ -90,7 +92,7 @@ const SettingCard = React.memo(function SettingCard({
         {children}
       </div>
       {isSelected ? (
-        <span className="absolute -top-1.5 -inset-e-1.5 inline-flex size-5 items-center justify-center rounded-full bg-slate-950 text-white shadow-md dark:bg-white dark:text-slate-950">
+        <span className="absolute -inset-e-1.5 -top-1.5 inline-flex size-5 items-center justify-center rounded-full bg-slate-950 text-white shadow-md dark:bg-white dark:text-slate-950">
           <Check className="size-3.5" />
         </span>
       ) : null}
@@ -226,7 +228,7 @@ function SettingSection<T extends string>({
   title,
   value,
 }: {
-  columns?: 2 | 3
+  columns?: 2 | 3 | 4
   onReset?: () => void
   onValueChange: (value: T) => void
   options: readonly SettingOption<T>[]
@@ -237,9 +239,7 @@ function SettingSection<T extends string>({
   return (
     <section className="flex flex-col gap-3">
       <div className="flex items-center gap-2 px-1">
-        <h2 className="text-sm font-semibold text-muted-foreground">
-          {title}
-        </h2>
+        <h2 className="text-sm font-semibold text-muted-foreground">{title}</h2>
         {onReset ? (
           <Button
             type="button"
@@ -257,7 +257,11 @@ function SettingSection<T extends string>({
       <div
         className={cn(
           "grid gap-3",
-          columns === 2 ? "grid-cols-2" : "grid-cols-3"
+          columns === 2
+            ? "grid-cols-2"
+            : columns === 3
+              ? "grid-cols-3"
+              : "grid-cols-4"
         )}
       >
         {options.map((option) => (
@@ -278,15 +282,15 @@ function SettingSection<T extends string>({
 function SettingsSheetContent() {
   const { theme, setTheme } = useTheme()
   const { direction, setDirection } = useDirectionSettings()
-  const [sidebar, setSidebar] = React.useState<SidebarOption>("floating")
-  const [layout, setLayout] = React.useState<LayoutOption>("default")
+  // const [sidebar, setSidebar] = React.useState<SidebarOption>("floating")
+  // const [layout, setLayout] = React.useState<LayoutOption>("default")
 
   const currentTheme = (theme ?? "system") as ThemeOption
 
   const resetAll = React.useCallback(() => {
     setTheme(DEFAULT_SETTINGS.theme)
-    setSidebar(DEFAULT_SETTINGS.sidebar)
-    setLayout(DEFAULT_SETTINGS.layout)
+    // setSidebar(DEFAULT_SETTINGS.sidebar)
+    // setLayout(DEFAULT_SETTINGS.layout)
     setDirection(DEFAULT_SETTINGS.direction)
   }, [setDirection, setTheme])
 
@@ -299,7 +303,7 @@ function SettingsSheetContent() {
         </SheetDescription>
       </SheetHeader>
 
-      <div className="flex-1 overflow-y-auto px-4 py-4">
+      <ScrollArea className="flex-1 overflow-y-auto px-4 py-4">
         <div className="flex flex-col gap-6">
           <SettingSection
             title="Theme"
@@ -311,23 +315,6 @@ function SettingsSheetContent() {
           />
 
           <SettingSection
-            title="Sidebar"
-            options={SIDEBAR_OPTIONS}
-            value={sidebar}
-            onValueChange={setSidebar}
-            onReset={() => setSidebar(DEFAULT_SETTINGS.sidebar)}
-            renderPreview={(option) => <SidebarPreview option={option} />}
-          />
-
-          <SettingSection
-            title="Layout"
-            options={LAYOUT_OPTIONS}
-            value={layout}
-            onValueChange={setLayout}
-            renderPreview={(option) => <LayoutPreview option={option} />}
-          />
-
-          <SettingSection
             title="Direction"
             columns={2}
             options={DIRECTION_OPTIONS}
@@ -335,8 +322,9 @@ function SettingsSheetContent() {
             onValueChange={setDirection}
             renderPreview={(option) => <DirectionPreview direction={option} />}
           />
+          <ThemeCustomizer />
         </div>
-      </div>
+      </ScrollArea>
 
       <div className="border-t px-4 py-4">
         <Button

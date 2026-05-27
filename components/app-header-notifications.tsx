@@ -51,7 +51,7 @@ export const AppHeaderNotifications = () => {
       <PopoverContent align="end" className="w-80 gap-0 p-0">
         <PopoverHeader className="flex-row items-center justify-between gap-3 p-3">
           <PopoverTitle>Notifications</PopoverTitle>
-          <Button type="button" variant="default" size="xs">
+          <Button type="button" variant="outline" size="xs">
             <CheckCheck />
             Mark all as read
           </Button>

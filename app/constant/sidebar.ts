@@ -71,11 +71,11 @@ export const sidebarMenu: SidebarMenuGroup[] = [
         items: [
           {
             title: "Sign In",
-            url: "/sign-in",
+            url: "/clerk/sign-in",
           },
           {
             title: "Sign Up",
-            url: "/sign-up",
+            url: "/clerk/sign-up",
           },
           {
             title: "User Management",
