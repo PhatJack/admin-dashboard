@@ -15,7 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { GoogleAnalytics } from "@thesvg/react"
 
 const statusVariant: Record<
   AppIntegrationStatus,
