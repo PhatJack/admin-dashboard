@@ -1,6 +1,12 @@
 import { ShieldAlert } from "lucide-react"
+import type { Metadata } from "next"
 
 import { ErrorEmpty } from "../_components/error-empty"
+
+export const metadata: Metadata = {
+  title: "Service Unavailable",
+  description: "View service status guidance when the dashboard is temporarily unavailable.",
+}
 
 export default function ServiceUnavailablePage() {
   return (

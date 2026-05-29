@@ -1,4 +1,10 @@
 import { SignUp } from "@clerk/nextjs"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Sign Up",
+  description: "Create a secure Clerk account for the admin dashboard.",
+}
 
 export default function SignUpPage() {
   return (

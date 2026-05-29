@@ -1,7 +1,12 @@
-import Link from "next/link"
 import { Rocket } from "lucide-react"
+import type { Metadata } from "next"
 
 import { ErrorEmpty } from "../errors/_components/error-empty"
+
+export const metadata: Metadata = {
+  title: "Coming Soon",
+  description: "Preview a dashboard area that is still being prepared.",
+}
 
 export default function ComingSoonPage() {
   return (

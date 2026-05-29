@@ -1,6 +1,12 @@
 import { ClockAlert } from "lucide-react"
+import type { Metadata } from "next"
 
 import { ErrorEmpty } from "../_components/error-empty"
+
+export const metadata: Metadata = {
+  title: "Gateway Timeout",
+  description: "View retry guidance when the dashboard server takes too long to respond.",
+}
 
 export default function GatewayTimeoutPage() {
   return (

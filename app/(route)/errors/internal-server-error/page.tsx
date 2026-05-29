@@ -1,6 +1,12 @@
 import { ServerCrash } from "lucide-react"
+import type { Metadata } from "next"
 
 import { ErrorEmpty } from "../_components/error-empty"
+
+export const metadata: Metadata = {
+  title: "Internal Server Error",
+  description: "View recovery guidance when the dashboard encounters a server error.",
+}
 
 export default function InternalServerErrorPage() {
   return (

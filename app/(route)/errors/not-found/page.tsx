@@ -1,6 +1,12 @@
 import { SearchX } from "lucide-react"
+import type { Metadata } from "next"
 
 import { ErrorEmpty } from "../_components/error-empty"
+
+export const metadata: Metadata = {
+  title: "Page Not Found",
+  description: "Find guidance when a dashboard page cannot be found.",
+}
 
 export default function NotFoundPage() {
   return (
