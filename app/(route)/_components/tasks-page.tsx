@@ -4,10 +4,12 @@ import * as React from "react"
 import {
   Column,
   ColumnDef,
+  PaginationState,
   SortingState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
+  getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
@@ -25,6 +27,22 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import {
   Table,
   TableBody,
@@ -151,6 +169,10 @@ const columns: ColumnDef<Task>[] = [
 
 export function TasksPage() {
   const [sorting, setSorting] = React.useState<SortingState>([])
+  const [pagination, setPagination] = React.useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  })
 
   // TanStack Table exposes function properties that React Compiler cannot memoize.
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -159,16 +181,22 @@ export function TasksPage() {
     columns,
     state: {
       sorting,
+      pagination,
     },
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   const completedTasks = tasks.filter((task) => task.status === "Done").length
   const activeTasks = tasks.length - completedTasks
   const urgentTasks = tasks.filter((task) => task.priority === "Urgent").length
+  const pageCount = Math.max(table.getPageCount(), 1)
+  const { pageIndex, pageSize } = table.getState().pagination
+  const currentPage = pageIndex + 1
 
   return (
     <div className="flex flex-col gap-6 p-4 sm:p-6">
@@ -177,12 +205,6 @@ export function TasksPage() {
         <p className="text-sm text-muted-foreground">
           Track delivery work across projects, owners, and priorities.
         </p>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-3">
-        <TaskSummaryCard label="Total tasks" value={tasks.length.toString()} />
-        <TaskSummaryCard label="Active" value={activeTasks.toString()} />
-        <TaskSummaryCard label="Urgent" value={urgentTasks.toString()} />
       </div>
 
       <Card>
@@ -201,9 +223,10 @@ export function TasksPage() {
             />
             <Input
               value={(table.getColumn("id")?.getFilterValue() as string) ?? ""}
-              onChange={(event) =>
+              onChange={(event) => {
                 table.getColumn("id")?.setFilterValue(event.target.value)
-              }
+                table.setPageIndex(0)
+              }}
               placeholder="Search tasks..."
               className="pl-8"
             />
@@ -252,19 +275,91 @@ export function TasksPage() {
               )}
             </TableBody>
           </Table>
+
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-between">
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <p className="text-sm text-muted-foreground">
+                Page {currentPage} of {pageCount}
+              </p>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-muted-foreground">
+                  Rows per page
+                </span>
+                <Select
+                  value={String(pageSize)}
+                  onValueChange={(value) => {
+                    table.setPageSize(Number(value))
+                    table.setPageIndex(0)
+                  }}
+                >
+                  <SelectTrigger size="sm" className="w-20">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      {[5, 10, 20, 50].map((size) => (
+                        <SelectItem key={size} value={String(size)}>
+                          {size}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <Pagination className="mx-0 w-auto">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious
+                    href="#"
+                    aria-disabled={!table.getCanPreviousPage()}
+                    tabIndex={table.getCanPreviousPage() ? undefined : -1}
+                    className={
+                      table.getCanPreviousPage()
+                        ? undefined
+                        : "pointer-events-none opacity-50"
+                    }
+                    onClick={(event) => {
+                      event.preventDefault()
+                      table.previousPage()
+                    }}
+                  />
+                </PaginationItem>
+                {Array.from({ length: pageCount }, (_, index) => (
+                  <PaginationItem key={index}>
+                    <PaginationLink
+                      href="#"
+                      isActive={currentPage === index + 1}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        table.setPageIndex(index)
+                      }}
+                    >
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext
+                    href="#"
+                    aria-disabled={!table.getCanNextPage()}
+                    tabIndex={table.getCanNextPage() ? undefined : -1}
+                    className={
+                      table.getCanNextPage()
+                        ? undefined
+                        : "pointer-events-none opacity-50"
+                    }
+                    onClick={(event) => {
+                      event.preventDefault()
+                      table.nextPage()
+                    }}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
         </CardContent>
       </Card>
     </div>
-  )
-}
-
-function TaskSummaryCard({ label, value }: { label: string; value: string }) {
-  return (
-    <Card size="sm">
-      <CardHeader>
-        <CardDescription>{label}</CardDescription>
-        <CardTitle className="text-2xl">{value}</CardTitle>
-      </CardHeader>
-    </Card>
   )
 }
